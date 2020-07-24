@@ -16,7 +16,7 @@ func init() {
 	f := func(msg string) {
 		fmt.Println(msg)
 	}
-	CliEngine = imageCli.NewEngine("./source/tempImages", "./output", f)
+	CliEngine = imageCli.NewEngine("./source/tempVideos", "./output", f)
 }
 
 func DoEdit(con cm.ImageConf) {
@@ -28,7 +28,9 @@ func DoEdit(con cm.ImageConf) {
 	if file.PathExist(CliEngine.OutPutDir) == false {
 		os.MkdirAll(CliEngine.OutPutDir, os.ModePerm)
 	}
+
 	isDealing = true
 	CliEngine.DoEdit("./images", con)
 	isDealing = false
+
 }

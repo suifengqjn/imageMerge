@@ -25,10 +25,18 @@ func init() {
 func InitImageConf()*common.ImageConf  {
 	return &common.ImageConf{
 		PreSize:    imageSplice.Size{},
-		PreText:    imageSplice.WaterTextConfig{},
+		PreText:    imageSplice.WaterTextConfig{F:singleText, Dpi:100},
 		Compose:    imageSplice.ComposeParam{},
-		AfterText:  imageSplice.WaterTextConfig{},
+		AfterText:  imageSplice.WaterTextConfig{F:composeText,Dpi:100},
 		AfterImage: imageSplice.WaterImageConfig{},
 		AfterSize:  imageSplice.Size{},
 	}
+}
+
+func singleText(fileName string, pre string, suf string) string {
+	return pre + fileName + suf
+}
+
+func composeText(fileName string, pre string, suf string) string {
+	return pre  + suf
 }

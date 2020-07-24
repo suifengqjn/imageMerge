@@ -217,11 +217,10 @@ func buildPreText(p gwu.Panel) {
 	arr := []string{"默认"}
 	arr = append(arr, keys...)
 	PreTextFontLb = gwu.NewListBox(arr)
+	common.VideoCon.PreText.FontPath = common.DefaultFont()
 	PreTextFontLb.AddEHandlerFunc(func(e gwu.Event) {
 		if PreTextFontLb.SelectedIdx() > 0 {
 			common.VideoCon.PreText.FontPath = fonts[PreTextFontLb.SelectedValue()]
-		} else {
-			common.VideoCon.PreText.FontPath = common.DefaultFont()
 		}
 
 	}, gwu.ETypeChange)
@@ -279,6 +278,12 @@ func buildComposeStyle(p gwu.Panel) {
 	ComposeStyleLb = gwu.NewListBox(common.ComposeStyles)
 	ComposeStyleLb.AddEHandlerFunc(func(e gwu.Event) {
 		if ComposeStyleLb.SelectedIdx() > 0 {
+			index := ComposeStyleLb.SelectedIdx()
+			if index <= 3 {
+				common.VideoCon.Compose.Style = 3
+			} else {
+				common.VideoCon.Compose.Style = 1
+			}
 			common.VideoCon.Compose.Count = common.GetComposeCount(ComposeStyleLb.SelectedIdx())
 		} else {
 			common.VideoCon.Compose.Switch = false
@@ -463,11 +468,10 @@ func buildAfterText(p gwu.Panel) {
 	arr := []string{"默认"}
 	arr = append(arr, keys...)
 	AfterTextFontLb = gwu.NewListBox(arr)
+	common.VideoCon.AfterText.FontPath = common.DefaultFont()
 	AfterTextFontLb.AddEHandlerFunc(func(e gwu.Event) {
 		if AfterTextFontLb.SelectedIdx() > 0 {
 			common.VideoCon.AfterText.FontPath = fonts[AfterTextFontLb.SelectedValue()]
-		} else {
-			common.VideoCon.AfterText.FontPath = common.DefaultFont()
 		}
 
 	}, gwu.ETypeChange)
